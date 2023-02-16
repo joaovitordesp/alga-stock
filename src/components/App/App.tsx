@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import Button from '../../shared/Button';
 import Container from '../../shared/Container';
-import Input from '../../shared/Input';
+import Table from '../../shared/Table';
 import Header from '../Header';
 import './App.css';
 
@@ -15,7 +14,7 @@ function App() {
       <Header title="AlgaStock" />
       
       <Container>
-      
+        <Table/>
       </Container>
     </div>
   );
