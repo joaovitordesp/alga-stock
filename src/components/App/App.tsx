@@ -15,15 +15,7 @@ function App() {
       <Header title="AlgaStock" />
       
       <Container>
-        <ul>
-          {
-            ['Daniel','Joao','Maycon','David','Vinicius','Joao'].map((name, index) =>{
-              return <li key={index}>
-                {name}
-              </li>
-            })
-          }
-        </ul>
+      
       </Container>
     </div>
   );
