@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import Button from '../../shared/Button';
 import Container from '../../shared/Container';
 import Form from '../../shared/Form';
@@ -7,6 +6,7 @@ import Table from '../../shared/Table';
 import { TableHeader } from '../../shared/Table/Table';
 import Products from '../../shared/Table/Table.mockdata';
 import Header from '../Header';
+import ProductForm from '../Products/ProductForm';
 import './App.css';
 
 const headers: TableHeader[] = [ 
@@ -27,28 +27,7 @@ function App() {
             data={Products}
         />
 
-<Form title="Product form" onSubmit={console.log}>
-          <Input
-            label="Name"
-            placeholder="E.g.: Cookie"
-          />
-          <Input
-            label="Price"
-            type="number"
-            step="0.01"
-            min="0"
-            placeholder="E.g.: 1.25"
-          />
-          <Input
-            label="Stock"
-            type="number"
-            min="0"
-            placeholder="E.g.: 15"
-          />
-          <Button>
-            Submit
-          </Button>
-        </Form>
+         <ProductForm></ProductForm>        
       </Container>
     </div>
   );
