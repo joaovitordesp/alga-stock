@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import Button from '../../shared/Button';
 import Container from '../../shared/Container';
+import Form from '../../shared/Form';
+import Input from '../../shared/Input';
 import Table from '../../shared/Table';
 import { TableHeader } from '../../shared/Table/Table';
 import Products from '../../shared/Table/Table.mockdata';
@@ -13,13 +16,7 @@ const headers: TableHeader[] = [
   { key: 'stock', value: 'Available Stock', right: true }
 ]
 
-
-function TestComponent() {
-  return <img width="16" src="https://img.icons8.com/pastel-glyph/2x/search--v2.png" alt="search-icon" />
-}
-
 function App() {
-  const [street, setStreet] = useState('')
   return (
     <div className="App">
       <Header title="AlgaStock" />
@@ -29,6 +26,29 @@ function App() {
             headers={headers}
             data={Products}
         />
+
+<Form title="Product form" onSubmit={console.log}>
+          <Input
+            label="Name"
+            placeholder="E.g.: Cookie"
+          />
+          <Input
+            label="Price"
+            type="number"
+            step="0.01"
+            min="0"
+            placeholder="E.g.: 1.25"
+          />
+          <Input
+            label="Stock"
+            type="number"
+            min="0"
+            placeholder="E.g.: 15"
+          />
+          <Button>
+            Submit
+          </Button>
+        </Form>
       </Container>
     </div>
   );
