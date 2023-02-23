@@ -1,31 +1,64 @@
 import React from 'react'
+import organizeData from '../../utils/organizeDataForTable'
 import './Table.scss'
-import Products from './Table.mockdata'
 
-const headers = [ 
-    {key: 'name', value:'Product'},
-    {key: 'price', value:'Price'},
-    {key:'actions', value:'Actions'},
-    {key: 'stock', value:'Available Stock'}
-]
+export interface TableHeader{
+    key: string
+    value: string
+    right?: boolean
+}
 
-const Table = () => {
+declare interface TableProps{
+    headers: TableHeader[],
+    data: any[]
+
+    enableActions ?: boolean
+
+    onDelete?:(item:any) => void
+    onDetail?:(item:any) => void
+    onEdit?:(item:any) => void
+}
+
+const Table: React.FC<TableProps> = (props) => {
+    const  [organizedData, indexedHeaders] = organizeData(props.data, props.headers)
+    
     return <table className="AppTable">
         <thead>
             <tr>
                 {
-                    headers.map(header => <th key={header.value}></th>)
+                    props.headers.map(header =>
+                        <th
+                        className={header.right ? 'right' : ''}
+                        key={header.key}
+                        >
+                        {header.value}
+                        </th>
+                    )
                 }
             </tr>
         </thead>
+        
         <tbody>
-           {
-                Products.map(product => <tr>
-                <td>{product.name}</td>
-                <td>{product.price}</td>
-                <td className="right">{product.stock}</td>
-                </tr>)
-           }
+            {
+                organizedData.map((row, i) => {
+                return <tr key={i}>
+                    {
+                    Object
+                        .keys(row)
+                        .map((item, i) =>
+                        item !== '$original'
+                            ? <td
+                                key={row.$original.id + i}
+                                className={indexedHeaders[item].right ? 'right' : ''}
+                            >
+                                { row[item] }
+                            </td>
+                            : null
+                        )
+                    }
+                </tr>
+                })
+            }
         </tbody>
     </table>
 }

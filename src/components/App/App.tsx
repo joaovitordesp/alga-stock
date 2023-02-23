@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
 import Container from '../../shared/Container';
 import Table from '../../shared/Table';
+import { TableHeader } from '../../shared/Table/Table';
+import Products from '../../shared/Table/Table.mockdata';
 import Header from '../Header';
 import './App.css';
+
+const headers: TableHeader[] = [ 
+  { key: 'id', value: '#' },
+  { key: 'name', value: 'Product' },
+  { key: 'price', value: 'Price', right: true },
+  { key: 'stock', value: 'Available Stock', right: true }
+]
+
 
 function TestComponent() {
   return <img width="16" src="https://img.icons8.com/pastel-glyph/2x/search--v2.png" alt="search-icon" />
 }
+
 function App() {
   const [street, setStreet] = useState('')
   return (
@@ -14,7 +25,10 @@ function App() {
       <Header title="AlgaStock" />
       
       <Container>
-        <Table/>
+        <Table
+            headers={headers}
+            data={Products}
+        />
       </Container>
     </div>
   );
