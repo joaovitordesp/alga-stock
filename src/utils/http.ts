@@ -1,5 +1,5 @@
 import axios from 'axios'
 
-const https = axios.create()
+const http = axios.create()
 
-export default https
+export default http
