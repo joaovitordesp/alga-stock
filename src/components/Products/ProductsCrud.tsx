@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2'
+import {connect} from 'react-redux'
 import { 
     createSingleProduct, 
     deleteSingleProduct, 
@@ -14,15 +15,19 @@ const headers: TableHeader[] = [
     { key: 'name', value: 'Product' },
     { key: 'price', value: 'Price', right: true },
     { key: 'stock', value: 'Available Stock', right: true }
-  ]
+]
 
-const ProductsCrud = () =>{
-    const [products, setProducts] = useState<Product[]>([])
+declare interface ProductsCRUDProps{
+    products: Product[]
+}
+
+const ProductsCrud: React.FC<ProductsCRUDProps> = (props) =>{
+    //const [products, setProducts] = useState<Product[]>([])
   const [updatingProduct, setUpdatingProduct] = useState<Product | undefined>(undefined)
 
   async function fetchData() {
-    const _products = await getAllProducts()
-    setProducts(_products)
+    // const _products = await getAllProducts()
+    // setProducts(_products)
   }
 
   useEffect(() => {
@@ -94,7 +99,7 @@ const ProductsCrud = () =>{
     return <>
         <Table
           headers={headers}
-          data={products}
+          data={props.products}
           enableActions
           onDelete={handleProductDelete}
           onDetail={handleProductDetail}
@@ -109,4 +114,8 @@ const ProductsCrud = () =>{
     </>
 }
 
-export default ProductsCrud
+const mapStateToProps = (state: any) =>({
+    products: state.products
+})
+
+export default connect(mapStateToProps)(ProductsCrud)
